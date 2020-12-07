@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:35:12 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/03 18:42:42 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/08 01:10:38 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,10 @@ int			check_ok(char *b)
 	return (x);
 }
 
-
-
-int		re(char *b, int t, char *base, int size)
+int			re(char *b, int t, char *base, int size)
 {
-	return ((getin(base, *b) >= 4) ? 
-		re(++b, size * t + (getin(base, *b) - 4), base, size) : t);
+	return ((getin(base, *b) >= 4) ?
+			re(b + 1, size * t + (getin(base, *b) - 4), base, size) : t);
 }
 
 int			ft_atoi(char *str, char *base, int size)
@@ -66,7 +64,9 @@ int			ft_atoi(char *str, char *base, int size)
 		if (((!((n & 1) - 1) && c <= 1) || !c) || (!(c - 4) && *(s = str)))
 			break ;
 		if ((c >= 2) && (n |= 1)
-		&& !(c - 2) && (n += (n & 2) ? -2 : +2));
+				&& !(c - 2) && (n += (n & 2) ? -2 : +2))
+		{
+		}
 		str++;
 	}
 	return (((n & 2) ? -1 : 1) * re(s, 0, base, size));

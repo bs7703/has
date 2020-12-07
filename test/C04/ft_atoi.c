@@ -1,4 +1,16 @@
-int		check_in(char str)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sakim <sakim@student.42.kr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/08 01:01:22 by sakim             #+#    #+#             */
+/*   Updated: 2020/12/08 01:04:58 by sakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int			check_in(char str)
 {
 	if ((str >= 48 && str <= 57) || (str >= 9 && str <= 13) || str == 32)
 		return ((str >= 48) ? 2 : 1);
@@ -7,13 +19,13 @@ int		check_in(char str)
 	return (0);
 }
 
-int		re(char* b, int  t)
+int			re(char *b, int t)
 {
 	return ((check_in(*b) == 2) ?
-		re(b, *b++ - 48 + t * 10) : t);
+			re(b, *b++ - 48 + t * 10) : t);
 }
 
-int			ft_atoi(char* str)
+int			ft_atoi(char *str)
 {
 	int		c;
 	char	*s;
@@ -27,7 +39,9 @@ int			ft_atoi(char* str)
 		if (((!((n & 1) - 1) && c <= 1) || !c) || (!(c - 2) && *(s = str)))
 			break ;
 		if ((c > 2) && (n |= 1)
-		&& !(c - 3) && (n += (n & 2) ? -2 : +2));
+				&& !(c - 3) && (n += (n & 2) ? -2 : +2))
+		{
+		}
 		str++;
 	}
 	return (((n & 2) ? -1 : 1) * re(s, 0));
