@@ -1,15 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t2.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sakim <sakim@student.42.kr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/08 00:56:24 by sakim             #+#    #+#             */
+/*   Updated: 2020/12/08 00:57:03 by sakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
-#define max 9
+
+#define MAX 9
+
 int			ff(char *b, int d, int n)
 {
 	while (++n < d + 1)
 		if (*(b + d - n) - n == *(b + d) || *(b + d - n) + n == *(b + d)
-			|| *(b + d - n) == *(b + d))
+				|| *(b + d - n) == *(b + d))
 			return (0);
 	return (1);
 }
 
-int			printAll(char *s)
+int			printall(char *s)
 {
 	while (*s)
 		write(1, s++, 1);
@@ -17,21 +31,21 @@ int			printAll(char *s)
 	return (1);
 }
 
-int			cA(int d, char *s, int r)
+int			ca(int d, char *s, int r)
 {
-	while (d <= max && ++*(s + d) <= 57)
+	while (d <= MAX && ++*(s + d) <= 57)
 		if (ff(s, d, 0))
-			r = r + ((d == max) ? printAll(s) : cA(d + 1, s, 0));
+			r = r + ((d == MAX) ? printall(s) : ca(d + 1, s, 0));
 	return ((*(s + d) = 47) + r - 47);
 }
 
 int			ft_ten_queens_puzzle(void)
 {
-	char	start[max + 2];
+	char	start[MAX + 2];
 	int		i;
 
 	i = -1;
-	while (++i < max + 2)
-		start[i] = (i == max + 1) ? 0 : 47;
-	return cA(0, start, 0);
+	while (++i < MAX + 2)
+		start[i] = (i == MAX + 1) ? 0 : 47;
+	return (ca(0, start, 0));
 }

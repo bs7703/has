@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 19:21:43 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/03 19:24:23 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/08 00:43:17 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		ft_is_prime(int nb)
 
 int		ft_find_next_prime(int nb)
 {
-	while (!ft_is_prime(nb) && ++nb);
+	while (!ft_is_prime(nb) && ++nb)
+	{
+	}
 	return (nb);
 }

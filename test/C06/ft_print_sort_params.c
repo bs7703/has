@@ -1,47 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_sort_params.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sakim <sakim@student.42.kr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/08 00:36:38 by sakim             #+#    #+#             */
+/*   Updated: 2020/12/08 00:38:24 by sakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		ft_strcmp(char *s1, char *s2)
+#include <unistd.h>
+
+int			ft_strcmp(char *s1, char *s2)
 {
-	while (*s1 && (*s1 == *s2))
+	int		x;
+
+	x = 0;
+	while (s1[x] && s1[x] == s2[x] && ++x)
 	{
-		s1++;
-		s2++;
 	}
-	return (*s1 - *s2);
+	return ((unsigned char)s1[x] - (unsigned char)s2[x]);
 }
-void	ct(char *a, char *b)
+
+int			ct(char **args, int a, int b)
 {
 	char	*temp;
 
-	temp = a;
-	a = b;
-	b = temp;
+	temp = args[a];
+	args[a] = args[b];
+	args[b] = temp;
+	return (0);
 }
-void	quick_sort(char **args, int size)
-{
-	int	j;
-	int	i;
-	int p;
 
-	if (size < 2)
-		return ;
-	p = (size / 2);
-	j = size;
+void		b_s(char **args)
+{
+	int		j;
+	int		g;
+	int		i;
+
 	i = -1;
-	while (i < j)
-		{
-			while (i++ && ft_strcmp(args[f],args[i]) < 0);
-			while (j-- && ft_strcmp(args[f],args[j]) > 0);
-			ct(args[i],args[j]);
-		}
-	quick_sort(args, i);
-	quick_sort(args + i + 1, size - i - 1);
+	while ((j = -1) && args[++i + 1])
+		while (args[++j + 1])
+			g = (ft_strcmp(args[j], args[j + 1]) > 0) ?
+				ct(args, j, j + 1) : 1;
 }
 
-int	main(int size, char **args)
+int			main(int size, char **args)
 {
-	quick_sort(args + 1,size - 1);
-		while(size && *(++args))
-			while(**(args))
-				write(1, *((*args)++), 1);
+	if (size < 2)
+		return (0);
+	b_s(args + 1);
+	while (*(++args))
+		while (**args || !(write(1, "\n", 1)))
+			write(1, (*args)++, 1);
 	return (0);
 }
