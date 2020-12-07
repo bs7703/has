@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:28:10 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/03 19:11:50 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/06 20:32:17 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ char		*ft_strstr(char *str, char *to_find)
 	while (*str)
 	{
 		p = 0;
-		while (*(str + p) == *(to_find + p++))
-			if (!(*(to_find + p) && *(str + p)))
-				return (*(str + p) || !*(to_find + p)) ? (str) : (0);
+		while (*(str + p) == *(to_find + p))
+		{
+			p++;
+			if (!*(to_find + p))
+				return (str);
+			if (!*(str + p))
+				return (0);
+		}
 		str++;
 	}
 	return (0);
 }
-

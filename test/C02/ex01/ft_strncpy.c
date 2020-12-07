@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 16:37:29 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/03 18:46:12 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/07 01:49:04 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	x = 0;
 	while (x < n)
 	{
-		*(dest + x) = *(src + x);
-		if (*(src + x) == 0)
-			break ;
+		if (*src)
+			*(dest + x) = *(src++);
+		else
+			*(dest + x) = 0;
 		x++;
 	}
 	return (dest);
 }
-

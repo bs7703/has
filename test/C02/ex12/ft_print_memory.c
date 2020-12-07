@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:06:49 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/03 19:05:16 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/08 01:14:35 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char				th(char x)
 
 void				print_memory(char *addr)
 {
-	long			a;
+	unsigned long	a;
 	int				x;
 	char			t;
 
 	x = -1;
-	a = (long)addr;
+	a = (unsigned long)addr;
 	while (++x < 16)
 	{
 		t = th((char)((a >> (60 - 4 * x)) & 15));
@@ -33,13 +33,13 @@ void				print_memory(char *addr)
 	write(1, ": ", 2);
 }
 
-void				print_contenthex(char *addr)
+void				print_contenthex(char *addr, int size)
 {
 	int				i;
 	char			c;
 
 	i = -1;
-	while (++i < 16)
+	while (++i < size)
 	{
 		c = th((*(addr + i) >> 4) & 15);
 		write(1, &c, 1);
@@ -47,50 +47,44 @@ void				print_contenthex(char *addr)
 		write(1, &c, 1);
 		if (i % 2 == 1)
 			write(1, " ", 1);
-		if (!*(addr + i))
-			break ;
 	}
+	while (i < 16)
+		write(1, " ", (i++ % 2 == 1) ? 2 : 1);
 }
 
-void				print_content(char *addr)
+int					print_content(char *addr, int size)
 {
 	int				i;
-	int				z;
 	int				cond;
 
-	i = 0;
-	while (*(addr + i) && i < 16)
-		i++;
-	z = 15 - i;
 	i = -1;
-	while (++i < z)
+	while (++i < 16 - size || ((i = -1) + 1))
 		write(1, " ", 1);
-	i = -1;
-	while (++i < 16)
+	while (++i < size)
 	{
 		cond = (*(addr + i) > 31 && *(addr + i) < 127);
 		if (cond)
 			write(1, addr + i, 1);
 		else
 			write(1, ".", 1);
-		if (*(addr + i) == 0)
-			break ;
 	}
+	return (0);
 }
 
 void				*ft_print_memory(void *addr, unsigned int size)
 {
-	char			**add;
-	unsigned int	index;
+	char			*a;
+	unsigned int	i;
 
-	index = -1;
-	add = (char **)addr;
-	while (++index < size)
+	i = 0;
+	a = (char *)addr;
+	while (i < size)
 	{
-		print_memory(*(add));
-		print_contenthex(*(add));
-		print_content(*(add++));
+		print_memory(a + i);
+		print_contenthex(a + i, (size < 16 + i) ? size - i : 16);
+		print_content(a + i, (size < 16 + i) ? size - i : 16);
 		write(1, "\n", 1);
+		i += 16;
 	}
 	return (addr);
 }

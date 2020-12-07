@@ -6,15 +6,16 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:23:54 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/03 16:13:39 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/06 12:34:09 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 int				str_len(char *str)
 {
 	unsigned int	x;
 
 	x = 0;
-	while(*(str + x))
+	while (*(str + x))
 		x++;
 	return (x);
 }
