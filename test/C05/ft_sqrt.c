@@ -6,13 +6,13 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 19:19:58 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 00:43:54 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/08 13:26:05 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_sqrt(int nb)
+int					ft_sqrt(int nb)
 {
-	int x;
+	unsigned int	x;
 
 	x = 1;
 	while ((x * x) < nb && ++x)
