@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:40:33 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 19:42:43 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/08 19:54:33 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,31 @@ char		*ft_strcate(char *dest, char *src)
 	return (dest + i);
 }
 
-char		**ft_split(char *str, char *charset)
+char		*ft_strstr(char *str, char *to_find)
 {
-	char	*re;
+	int		p;
 	int		i;
-	int		j;
-	char	*f;
 
 	i = 0;
-	j = -1;
-	f = (char *)malloc(sizeof(char));
-	*f = 0;
-	if (!*strs || size <= 0)
-		return (f);
-	re = (char *)malloc(1 + ft_strlen(strs, size)
-			+ (size - 1) * ft_strlen2(sep));
-	f = re;
-	while ((i < size) && strs[i])
+	if (!*to_find)
+		return (str);
+	while (str[i])
 	{
-		while (strs[i][++j] || !(j = -1))
-			*(re++) = strs[i][j];
-		if ((++i < size) && strs[i])
-			re = ft_strcate(re, sep);
-		else
-			*re = 0;
+		p = 0;
+		while (str[i + p] == to_find[p])
+		{
+			p++;
+			if (!to_find[p])
+				return (str + i);
+			if (!str[p + i])
+				return (0);
+		}
+		i++;
 	}
-	return (f);
+	return (0);
+}
+
+char		**ft_split(char *str, char *charset)
+{
+
 }
