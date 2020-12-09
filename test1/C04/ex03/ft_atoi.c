@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.42.kr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 01:01:22 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 19:25:08 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/09 21:41:08 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int			check_in(char str)
 
 int			re(char *b, int t)
 {
-	return ((check_in(*b + 1) == 2) ?
-			re(b + 1, *(b) - 48 + t * 10) : t);
+	return ((check_in(*(b + 1)) == 2) ?
+			re(b + 1, *(b) - 48 + t * 10) : t * 10 + *b - 48);
 }
 
 int			ft_atoi(char *str)

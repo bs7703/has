@@ -6,47 +6,21 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:40:33 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 19:54:33 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/10 01:08:17 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int			ft_strlen(char **str, int size)
+int			ft_strlen(char *str)
 {
 	int		x;
-	int		re;
-	int		y;
 
-	y = -1;
-	re = 0;
 	x = -1;
-	while ((++y < size) && str[y])
+	while (*(str + ++x))
 	{
-		while (*(*(str + y) + ++x) || !(x = -1))
-			re++;
 	}
-	return (re);
-}
-
-int			ft_strlen2(char *str)
-{
-	int		x;
-
-	x = 0;
-	while (*(str + +x))
-		++x;
 	return (x);
-}
-
-char		*ft_strcate(char *dest, char *src)
-{
-	int		i;
-
-	i = -1;
-	while (*(src + ++i))
-		*(dest + i) = *(src + i);
-	return (dest + i);
 }
 
 char		*ft_strstr(char *str, char *to_find)
@@ -56,7 +30,7 @@ char		*ft_strstr(char *str, char *to_find)
 
 	i = 0;
 	if (!*to_find)
-		return (str);
+		return (0);
 	while (str[i])
 	{
 		p = 0;
@@ -73,7 +47,63 @@ char		*ft_strstr(char *str, char *to_find)
 	return (0);
 }
 
+int			calc(char *str, char *charset)
+{
+	char	*ct;
+	char	*pv;
+	int		cs;
+	int		size;
+
+	size = 1;
+	cs = ft_strlen(charset);
+	ct = ft_strstr(str, charset);
+	pv = str;
+	while (ct)
+	{
+		if (pv < ct)
+			++size;
+		if (!*(ct + 1))
+			break ;
+		pv = ct + cs;
+		ct = ft_strstr(ct + 1, charset);
+		if (!ct && ++size)
+			break ;
+	}
+	return (size);
+}
+
+char		*am(char *a, char *set)
+{
+	char	*result;
+
+	result = a;
+	if (set && *set)
+		*set = 0;
+	return (result);
+}
+
 char		**ft_split(char *str, char *charset)
 {
+	char	**result;
+	char	**two;
+	char	*pv;
+	char	*ct;
+	int		cs;
 
+	cs = ft_strlen(charset);
+	result = (char **)malloc(sizeof(char *) * calc(str, charset) + 1);
+	two = result;
+	ct = ft_strstr(str, charset);
+	pv = str;
+	while ((ct) || ((*(result++) = am(pv, 0)) &&
+			(*result = 0)))
+	{
+		if (pv < ct)
+			*(result++) = am(pv, ct);
+		if (!*(ct + 1) && !(*result = 0))
+			break ;
+		pv = ct + cs;
+		ct = ft_strstr(ct + 1, charset);
+	}
+	return (two);
 }

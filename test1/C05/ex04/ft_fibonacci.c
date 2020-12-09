@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 20:28:10 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 19:44:51 by sakim            ###   ########.fr       */
+/*   Created: 2020/12/03 19:30:36 by sakim             #+#    #+#             */
+/*   Updated: 2020/12/09 21:57:15 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char		*ft_strstr(char *str, char *to_find)
+int	ft_fibonacci(int i)
 {
-	int		p;
-	int		i;
-
-	i = 0;
-	if (!*to_find)
-		return (str);
-	while (str[i])
-	{
-		p = 0;
-		while (str[i + p] == to_find[p])
-		{
-			p++;
-			if (!to_find[p])
-				return (str + i);
-			if (!str[p + i])
-				return (0);
-		}
-		i++;
-	}
-	return (0);
+	if (i < 0)
+		return (-1);
+	return ((i > 1) ? ft_fibonacci(i - 1) +
+		ft_fibonacci(i - 2) : (i & 1));
 }

@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.42.kr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 00:21:17 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/09 03:44:16 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/09 22:01:47 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int size, char **args)
 
 	i = 0;
 	while (--size > 0 && *(args[size]))
-		while (args[size][i] || !write(1, "\n",1) || (i = 0))
+		while (args[size][i] || !write(1, "\n", 1) || (i = 0))
 			write(1, &args[size][i++], 1);
 	return (0);
 }

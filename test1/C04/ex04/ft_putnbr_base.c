@@ -6,7 +6,7 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:13:54 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 01:05:23 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/09 21:41:51 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int		pa(int x)
 {
-	if (x >= 48 && x <= 57)
+	if ((x >= 9 && x <= 13) || (x == 32)
+			|| (x == '+') || (x == '-'))
 		return (1);
-	if (x >= 65 && x <= 90)
-		return (2);
-	if (x >= 90 && x <= 122)
-		return (3);
 	return (0);
 }
 
@@ -29,10 +26,9 @@ int		check_ok(char *b)
 	int	y;
 
 	x = -1;
-	while (*(b + ++x))
+	while (*(b + ++x) && (y = -1))
 	{
-		y = -1;
-		if (pa(*(b + x)) == 0)
+		if (pa(*(b + x)))
 			return (-1);
 		while (*(b + x + ++y + 1))
 			if (*(b + x) == *(b + x + y + 1))
@@ -41,10 +37,12 @@ int		check_ok(char *b)
 	return (x);
 }
 
-void	changebase(long nbr, int size, char *base)
+void	changebase(long nbr, int size, char *base, int fc)
 {
 	if (nbr > 0)
-		changebase(nbr / size, size, base);
+		changebase(nbr / size, size, base, 0);
+	else if (fc != 1)
+		return ;
 	write(1, base + nbr % size, 1);
 }
 
@@ -55,9 +53,9 @@ void	ft_putnbr_base(int nbr, char *base)
 
 	data = nbr;
 	size = check_ok(base);
-	if (size < 1)
+	if (size <= 1)
 		return ;
 	if (data < 0 && (data *= -1))
 		write(1, "-", 1);
-	changebase(data, size, base);
+	changebase(data, size, base, 1);
 }
