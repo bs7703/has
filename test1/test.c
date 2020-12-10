@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include "C04/ex03/ft_atoi.c"
-#include "C04/ex04/ft_putnbr_base.c"
+#include "C07/ex05/ft_split.c"
 int	main(int size, char **args)
 {
-	char a[] = "As";
-	a[1] = '\'';
-	char b[] = "AD";
-	ft_putnbr_base(-10,a);
+	char	**g;
+
+	if (size <= 2)
+		return (0);
+	g = ft_split(*(args + 2),*(args + 1));
+	while (g != 0)
+		printf("%s",*(g++));
 }
