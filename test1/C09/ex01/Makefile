@@ -1,23 +1,21 @@
-CC = gcc -c
+CC = gcc
 TARGET = libft.a
 CFLAGS = -Wall -Wextra -Werror
+SRCS = srcs/ft_putchar.c srcs/ft_swap.c srcs/ft_putstr.c srcs/ft_strlen.c srcs/ft_strcmp.c
 OBJS = srcs/ft_putchar.o srcs/ft_swap.o srcs/ft_putstr.o srcs/ft_strlen.o srcs/ft_strcmp.o
-SRCS = $(OBJS:.o=.c)
-INCS = -l./includes
+INCS = -l ./includes
 
 all: $(TARGET)
 
 $(TARGET) : $(OBJS)
 	ar -cr $@ $(OBJS)
-%.o:%.c
-	$(CC) $(CFLAGS) $< -o $@ -l includes/ft.h
+srcs/%.o:%.c
+	$(CC) $(CFLAGS) -c $< -I includes 
 clean :
 	rm -f srcs/*.o
-	rm -f $(TARGET)
 fclean :
 	rm -f srcs/*.o
 	rm -f $(TARGET)
-
-re : 
-	make $(fclean)
+re :
+	make fclean
 	make

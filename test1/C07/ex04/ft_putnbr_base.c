@@ -6,13 +6,13 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:13:54 by sakim             #+#    #+#             */
-/*   Updated: 2020/12/08 19:15:28 by sakim            ###   ########.fr       */
+/*   Updated: 2020/12/10 18:57:13 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int		pa(int x)
+int			pa(int x)
 {
 	if (x >= 48 && x <= 57)
 		return (1);
@@ -23,10 +23,10 @@ int		pa(int x)
 	return (0);
 }
 
-int		check_ok2(char *b)
+int			check_ok(char *b)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	x = -1;
 	while (*(b + ++x))
@@ -41,23 +41,38 @@ int		check_ok2(char *b)
 	return (x);
 }
 
-void	changebase(long nbr, int size, char *base)
+void		changebase(long nbr, int *size, char *base, char *result)
 {
 	if (nbr > 0)
-		changebase(nbr / size, size, base);
-	write(1, base + nbr % size, 1);
+	{
+		size[1]--;
+		changebase(nbr / size[0], size, base, result);
+		size[1]++;
+		result[size[1] - 1] = base[nbr % size[0]];
+	}
+	return ;
 }
 
-void	ft_putnbr_base(int nbr, char *base)
+char		*ft_convert_base2(int nbr, char *base)
 {
-	int		size;
+	int		size[2];
 	long	data;
+	char	*result;
 
+	size[1] = 1;
+	if ((size[0] = check_ok(base)) < 1)
+		return (0);
+	data = nbr / size[0];
+	while (data && ++size[1])
+		data /= size[0];
 	data = nbr;
-	size = check_ok2(base);
-	if (size < 1)
-		return ;
-	if (data < 0 && (data *= -1))
-		write(1, "-", 1);
-	changebase(data, size, base);
+	data = (data < 0) ? -data : data;
+	if (!(result = (char *)malloc(sizeof(char *) * (size[1] +
+				((nbr < 0) ? 2 : 1)))))
+		return (0);
+	if (nbr < 0)
+		*(result++) = '-';
+	result[size[1]] = 0;
+	changebase(data, size, base, result);
+	return (result + ((nbr < 0) ? -1 : 0));
 }
