@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.seoul42.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:41:20 by sakim             #+#    #+#             */
-/*   Updated: 2021/09/27 13:58:12 by sakim            ###   ########.fr       */
+/*   Updated: 2021/09/27 16:19:37 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ char	**ft_getbinlist(char **envs)
 			rs = ft_split(*(envs + i), '=');
 			free(rs[0]);
 			path = rs[1];
+			free(rs);
 			rs = ft_split(path, ':');
-			free (path);
+			free(path);
 			return (rs);
 		}
 	}
@@ -69,16 +70,17 @@ char	*ft_checkcmd(const char *cmd, char **list)
 
 	if (!cmd || !*cmd || !list)
 		return (0);
+	if (!access((const char *)cmd, X_OK))
+		return ((char *)cmd);
 	while (*list)
 	{
 		tmp = ft_join((const char *)*list, "/");
 		path = ft_join((const char *)tmp, cmd);
 		free(tmp);
-		tmp = 0;
-		if (!access((const char *)path, X_OK) || !*(list + 1))
+		if (!access((const char *)path, X_OK))
 			return (path);
 		free(path);
 		++list;
 	}
-	return (path);
+	return ((char *)cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.seoul42.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 09:57:52 by sakim             #+#    #+#             */
-/*   Updated: 2021/09/27 13:58:01 by sakim            ###   ########.fr       */
+/*   Updated: 2021/09/27 16:26:55 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_cmd(char *args, int fd1, int fd2, char **env)
 {	
 	char	**arvs;
 	char	**list;
+	char	*tmp;
 
 	if (dup2(fd1, 0) < 0 || dup2(fd2, 1) < 0)
 		ft_exit(-1);
@@ -51,8 +52,13 @@ void	ft_cmd(char *args, int fd1, int fd2, char **env)
 	close(fd2);
 	arvs = ft_split(args, ' ');
 	list = ft_getbinlist(env);
+	tmp = arvs[0];
 	arvs[0] = ft_checkcmd(arvs[0], list);
 	execve(arvs[0], arvs, env);
+	if (tmp != arvs[0])
+		free(tmp);
+	ft_freeall(list, 0);
+	ft_freeall(arvs, 0);
 }
 
 void	ft_run(char **args, int *fd, int n, char **env)

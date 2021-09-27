@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.seoul42.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 09:55:07 by sakim             #+#    #+#             */
-/*   Updated: 2021/09/27 13:57:43 by sakim            ###   ########.fr       */
+/*   Updated: 2021/09/27 16:24:14 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_freeall(char **args, int offset)
 {
+	char	**rs;
+
+	rs = args;
 	if (!args || !*(args + offset))
 		return ;
 	while (*(args + offset))
-	{
-		free(args + offset);
-		++args;
-	}
-	free(args);
+		free(*(args + offset++));
+	free(rs);
 }
 
 int	ft_len(void **p)

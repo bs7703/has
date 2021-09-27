@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.seoul42.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 09:42:04 by sakim             #+#    #+#             */
-/*   Updated: 2021/09/27 13:57:52 by sakim            ###   ########.fr       */
+/*   Updated: 2021/09/27 16:11:08 by sakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ char	**ft_split(char *str, char deli)
 	char	**rs;
 	int		i;
 
+	if (!str || !*str || !deli)
+		return (0);
 	i = -1;
 	size = ft_splitsize(str, deli);
 	rs = malloc(sizeof(char *) * (size + 1));
-	if (!rs || !str || !*str || !deli)
+	if (!rs)
 		return (0);
 	i = -1;
 	while (++i < size)
