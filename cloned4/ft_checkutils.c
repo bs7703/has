@@ -6,7 +6,7 @@
 /*   By: gimsang-won <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:05:27 by gimsang-w         #+#    #+#             */
-/*   Updated: 2021/12/17 03:00:31 by sakim            ###   ########.fr       */
+/*   Updated: 2021/12/17 21:14:15 by gimsang-w        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_cmdset(char *cmd)
 
 	rs = 0;
 	if (ft_strcmp(cmd, "rb") || ft_strcmp(cmd, "rrb")
-		|| ft_strcmp(cmd, "sb"))
+		|| ft_strcmp(cmd, "sb") || ft_strcmp(cmd, "pb"))
 		rs = B;
 	if (ft_strcmp(cmd, "ra") || ft_strcmp(cmd, "rb"))
 		rs |= R;
@@ -54,6 +54,8 @@ int	ft_cmd(int *a, int *b, int cmd, int size)
 	}
 	else if (cmd & GETB)
 		return (i);
+	else if (cmd & VAL)
+		return (ft_validate(a, i, size + i));
 	else if (cmd & R || cmd & RR)
 		ft_rotate(c, ft_selecti(size, i, cmd & NUM), cmd & RR);
 	else if (cmd & S && ((c == b && i > 1) || (c == a && size >= 2)))

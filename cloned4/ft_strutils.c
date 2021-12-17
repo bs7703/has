@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.seoul42.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 20:52:29 by sakim             #+#    #+#             */
-/*   Updated: 2021/10/28 14:18:31 by sakim            ###   ########.fr       */
+/*   Updated: 2021/12/17 21:54:24 by gimsang-w        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ int	ft_while(const char **str, char toig, int toreturn)
 		i[1] *= 2;
 	}
 	return (FAIL);
+}
+
+void	ft_trim(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (*(str + ++i))
+	{
+		if (*(str + i) == '\n')
+		{
+			*(str + i) = 0;
+			break ;
+		}
+	}
 }
 
 int	*ft_error(void *p)

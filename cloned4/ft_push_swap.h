@@ -6,7 +6,7 @@
 /*   By: sakim <sakim@student.seoul42.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 20:55:01 by sakim             #+#    #+#             */
-/*   Updated: 2021/12/17 12:09:56 by sakim            ###   ########.fr       */
+/*   Updated: 2021/12/17 22:50:28 by gimsang-w        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 # define ABS 32
 # define GETB 4096
 # define VAL 1024
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 10
 # define ERR -1
 # define DEL 10
 # define OCP 1
@@ -108,6 +108,7 @@ void	ft_rotate(int *i, int size, int p);
 int		ft_swap(int *a, int *b);
 int		ft_which(int *a, int *b, int cmd, int n);
 int		ft_pushswap(int *a, int *b, int size);
+void	ft_result(int n);
 int		ft_v(int type, int value);
 int		ft_roll(int x);
 void	ft_bingle(int *a, int *b, int c, int d);
@@ -119,15 +120,18 @@ int		ft_cmd(int *a, int *b, int cmd, int size);
 char	*ft_strcpy(char *str, int size);
 void	ft_order(int *a, int size);
 void	ft_printf(char *str);
+void	ft_trim(char *str);
 int		ft_square(int a);
-int		ft_multiplecmd(int *a, int *b, int n);
+void	ft_multiplecmd(int *a, int *b, int n);
 void	ft_words(int cmd);
 int		ft_sp(int *a, int b, int c);
 int		ft_leastop(int rota, int rotb, int *l);
 int		ft_find(int *a, int val);
+int		ft_validate(int *a, int i, int n);
 int		ft_checkarray(int *a, int val, int flag);
 void	ft_search(int *a, int *b);
 int		*ft_free0(void *p);
+int		ft_free(char **str, int n);
 int		ft_count(char **c);
 int		ft_get(int a, int b, int flag);
 #endif

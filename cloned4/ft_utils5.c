@@ -6,7 +6,7 @@
 /*   By: gimsang-won <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 12:46:03 by gimsang-w         #+#    #+#             */
-/*   Updated: 2021/10/28 12:47:34 by gimsang-w        ###   ########.fr       */
+/*   Updated: 2021/12/17 19:46:34 by gimsang-w        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ int	ft_sp(int *a, int b, int c)
 		++*a;
 		return (c);
 	}
+}
+
+int	ft_validate(int *a, int i, int n)
+{
+	if (i)
+		return (-3);
+	return (ft_checkarray(a, n, -1));
 }
 
 int	ft_leastop(int rota, int rotb, int *l)

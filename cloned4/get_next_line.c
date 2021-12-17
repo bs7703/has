@@ -6,28 +6,30 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:28:54 by sakim             #+#    #+#             */
-/*   Updated: 2021/12/17 02:41:59 by sakim            ###   ########.fr       */
+/*   Updated: 2021/12/17 22:59:34 by gimsang-w        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	ft_multiplecmd(int *a, int *b, int n)
+void	ft_multiplecmd(int *a, int *b, int n)
 {
 	int		run;
 	char	*rs;
 
 	rs = 0;
-	while (get_next_line(1, &rs) == 1)
+	while (get_next_line(0, &rs) == 1)
 	{
 		run = ft_cmdset(rs);
 		if (run < 1)
-			return (-1);
+		{
+			ft_result(-1);
+			return ;
+		}
 		run = ft_cmd(a, b, run | REINVOKED, n - ft_cmd(a, b, 4096, 0));
-		rs = 0;
 	}
-	run = ft_cmd(a, b, VAL, n - ft_cmd(a, b, 4096, 0));
-	return (run);
+	run = ft_cmd(a, b, VAL | REINVOKED, n - ft_cmd(a, b, 4096, 0));
+	ft_result(run);
 }
 
 int	get_next_line(int fd, char **line)

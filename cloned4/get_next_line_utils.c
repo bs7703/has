@@ -6,24 +6,26 @@
 /*   By: sakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 20:59:15 by sakim             #+#    #+#             */
-/*   Updated: 2021/12/17 02:07:17 by sakim            ###   ########.fr       */
+/*   Updated: 2021/12/17 22:01:16 by gimsang-w        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int					check(int fd, t_list *mylist)
+int	check(int fd, t_list *mylist)
 {
 	if ((mylist->ocp == UNOCP) && ((
-					mylist->fd == (fd + 1)) || (mylist->fd == 0)))
+				mylist->fd == (fd + 1)) || (mylist->fd == 0)))
 	{
 		mylist->size = 0;
 		mylist->origin.next = 0;
 		if (mylist->origin.size == 0)
-			if ((mylist->origin.size =
-						read(fd, mylist->origin.data, BUFFER_SIZE))
-					== ERR)
+		{
+			mylist->origin.size = read(fd,
+					mylist->origin.data, BUFFER_SIZE);
+			if (mylist->origin.size == ERR)
 				return (TRUE);
+		}
 		mylist->ocp = OCP;
 		mylist->fd = fd + 1;
 		mylist->current = &(mylist->origin);
@@ -32,7 +34,7 @@ int					check(int fd, t_list *mylist)
 	return (TRUE);
 }
 
-int					linecheck(t_list *mylist)
+int	linecheck(t_list *mylist)
 {
 	register int	i;
 
@@ -41,24 +43,32 @@ int					linecheck(t_list *mylist)
 		if (*(mylist->current->data + i) == DEL)
 			break ;
 	mylist->size += i;
-	return ((i < mylist->current->size) ? FALSE : TRUE);
+	if (i < mylist->current->size)
+		return (FALSE);
+	return (TRUE);
 }
 
-int					setlist(t_list *mylist, int size, int off)
+int	setlist(t_list *mylist, int size, int off)
 {
 	int				sign;
 	register int	i;
 
 	i = -1;
-	sign = (size == mylist->size) ? EOFF : READ;
+	if (size == mylist->size)
+		sign = EOFF;
+	else
+		sign = READ;
 	size = mylist->current->size - (off + 1);
 	while (++off < (mylist->current->size))
 		*(mylist->origin.data + ++i) = *(mylist->current->data + off);
-	mylist->origin.size = (size < 0) ? 0 : size;
+	if (size < 0)
+		mylist->origin.size = 0;
+	else
+		mylist->origin.size = size;
 	return (sign);
 }
 
-void				clean(t_list *mylist)
+void	clean(t_list *mylist)
 {
 	t_node			*dot;
 	t_node			*prev;
@@ -73,7 +83,7 @@ void				clean(t_list *mylist)
 	}
 }
 
-int					lnk(t_list *mylist, char **line)
+int	lnk(t_list *mylist, char **line)
 {
 	register int	i;
 	int				sign;
